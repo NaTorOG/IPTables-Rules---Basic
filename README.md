@@ -27,10 +27,10 @@ If you are reading this guide, is probabily because you don't have a good knowle
 about firewalling your server and secure the processes running on it.  
 It is **highly recommended** to run all the services in localhost(127.0.0.1) like MySQL or  
 Backend Servers(Spigot servers not Proxy BungeeGuard/Velocity)  
-and to now install webservices like Apache or NGIX.  
+and to not install webservices like Apache or NGIX.  
 
 ###### SSH Tips
-Run SSH using **Keys** and not Password! It is very important because we will avoid SSH Bruteforces attemps and we can  
+Run SSH using **Keys** and not Password! It is very important because we will avoid SSH Bruteforces attempts and we can  
 better manage the access to our server generating SSH Keys for our trusted members.  
 For even further protection, we can use ipset and create an **IP List of trusted IPS** that can attempt a connection to the SSH Port.  
 
@@ -47,6 +47,7 @@ Set every Minecraft Backend server(spigot servers) to run in 127.0.0.1 in server
 Set only the ProxyServer(Bungee/Waterfall/Velocity) to run in 0.0.0.0 in config.yml(host: 0.0.0.0:25565).  
 Set also in the Proxy config.yml the servers with 127.0.0.0.1 address.  
 Example:  
+
 servers:  
   hub:  
     motd: 'Hub Server'  
@@ -58,10 +59,11 @@ We aim with this guide to have a **DROP Policy** on INPUT and FORWARD chains.
 By defaults these chains policies are on ACCEPT, meaning that **all the connections** towards every port are accepted.  
 Changing the policies to DROP, we will only grant access to the ports we want and so to the services we want.  
 
-**Ports**
+**Ports**  
 I assume that you have only installed SSH and Minecraft Servers on your server so we will open only the necessary  
 ports to let these services work without problems.  
 Remember to respect the order of the rules and commands!  
+
 $ iptables -A INPUT -i lo -j ACCEPT  
 *( The loopback interface is also used if you configure your application server to connect to a database server with a localhost address. As such, you will want to be sure that your firewall is allowing these connections.)* 
 
@@ -79,7 +81,7 @@ $ iptables -A INPUT -p udp -m udp --dport A1:A2 -j ACCEPT
 *(Replace A1 and A2 with the ports numbers displayed with the cat command executed above.)*  
 
 $ iptables -A INPUT -p tcp -m tcp --dport 25565 -j ACCEPT  
-* (Replace if necessary 25565 with the port used by the Proxy server)*    
+*(Replace if necessary 25565 with the port used by the Proxy server)*    
 It is usually a good practice to limit per second the connections per IP, so we can limit and reduce some bot attacks  
 specifically some very **poor designed** bot attacks.  
 $ iptables -A INPUT -p tcp --syn --dport 25565 -m connlimit --connlimit-above 3 -j REJECT  
@@ -88,7 +90,7 @@ $ iptables -A INPUT -p tcp --syn --dport 25565 -m connlimit --connlimit-above 3 
 $ iptables -A INPUT -p icmp -m icmp --icmp-type 8 -m limit --limit 1/sec --limit-burst 1 -j ACCEPT  
 *(OPTIONAL - This rule will allow icmp requests with a limit of 1/sec)*  
 
-$ iptables -P INPUT DROP 
+$ iptables -P INPUT DROP  
 $ iptables -P FORWARD DROP  
 *(As stated above, we have now configured our firewall to accept connections only towards ports/services we want.  
 Changing the policy to DROP, will DROP all the connections that we have not defined.)*
