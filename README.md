@@ -40,11 +40,29 @@ they should always be **RUNNED ONLY on a NON sudo User.**
 Do not ever and ever use root or any sudo user to run externally accessible services.  
 
 ###### Basic Rules
-We aim to prevent your server from being bypassed by **UUID Spoofing.**  
+We aim to prevent your server from being bypassed by **UUID Spoofing.**
 
+**Minecraft Servers**  
+Set every Minecraft Backend server(spigot servers) to run in 127.0.0.1 in server.properties(server-ip).  
+Set only the ProxyServer(Bungee/Waterfall/Velocity) to run in 0.0.0.0 in config.yml(host: 0.0.0.0:25565).  
+Set also in the Proxy config.yml the servers with 127.0.0.0.1 address.  
+Example:  
+servers:  
+  hub:  
+    motd: 'Hub Server'  
+    address: 127.0.0.1:25566  
+    restricted: false  
+    
 **Policies**             
 We aim with this guide to have a **DROP Policy** on INPUT and FORWARD chains.  
 By defaults these chains policies are on ACCEPT, meaning that **all the connections** towards every port are accepted.  
 Changing the policies to DROP, we will only grant access to the ports we want and so to the services we want.  
+
+**Ports**
+I assume that you have only installed SSH and Minecraft Servers on your server so we will open only the necessary  
+ports to let these services work without problems.  
+Remember to respect the order of the rules and commands!  
+$ iptables -A INPUT -i lo -j ACCEPT  
+*( The loopback interface is also used if you configure your application server to connect to a database server with a localhost address. As such, you will want to be sure that your firewall is allowing these connections.)*  
 
 
