@@ -27,3 +27,12 @@ If you are reading this guide, is probabily because you don't have a good knowle
 about firewalling your server and secure the processes running on it.  
 It is highly recommended to run all the services in localhost(127.0.0.1) like MySQL or Backend Servers(Spigot servers not Proxy BungeeGuard/Velocity).  
 
+###### SSH Tips
+Run SSH using Keys and not Password! It is very important because we will avoid SSH Bruteforces attemps and we can  
+better manage the access to our server generating SSH Keys for our trusted members.  
+For even further protection, we can use ipset and create an IP List of trusted IPS that can attempt a connection to the SSH Port.  
+
+###### Basic Users Management
+All the exposed services(for exposed I mean services accessible externally, like your Minecraft server)  
+they should always be RUNNED ONLY on a NON sudo User.  
+Do not ever and ever use root or any sudo user to run services accessible externally.  
