@@ -33,6 +33,12 @@ better manage the access to our server generating SSH Keys for our trusted membe
 For even further protection, we can use ipset and create an IP List of trusted IPS that can attempt a connection to the SSH Port.  
 
 ###### Basic Users Management
-All the exposed services(for exposed I mean services accessible externally, like your Minecraft server)  
+All the exposed services(for exposed I mean externally accessible services, like your Minecraft server)  
 they should always be RUNNED ONLY on a NON sudo User.  
-Do not ever and ever use root or any sudo user to run services accessible externally.  
+Do not ever and ever use root or any sudo user to run externally accessible services.  
+
+###### Basic Rules
+We aim to prevent your server from being bypassed by UUID Spoofing.  
+
+> Policies  
+
