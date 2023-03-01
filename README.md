@@ -4,7 +4,7 @@ Basic IPTables Rules for a Minecraft Server
 In this guide, you will find basic IPTables rules useful for a minecraft server!
 
 ## What we need
-1 - Full root access to our machine (this guide won't work for Panels like Pterodactyl or Multicraft.  
+1 - Full root access to our machine (this guide won't work for Panels like Pterodactyl or Multicraft.)    
 2 - IPTables package.  
 3 - NeTFilter Persistent package.  
 4 - IPSET package (optional).  
@@ -74,7 +74,7 @@ $ iptables -A INPUT -p tcp -m tcp --dport 22 -j ACCEPT
 *(This rule will allow the traffic towards SSH, change the port from 22 to another if you don't use 22)*  
 
 $ cat /proc/sys/net/ipv4/ip_local_port_range  
-* This will prompt the kernel range ports that we have to allow to let the kernel works without problems.*  
+*This will prompt the kernel range ports that we have to allow to let the kernel works without problems.*  
 A1= First Number A2=Second Number  
 $ iptables -A INPUT -p tcp -m tcp --dport A1:A2 -j ACCEPT  
 $ iptables -A INPUT -p udp -m udp --dport A1:A2 -j ACCEPT  
