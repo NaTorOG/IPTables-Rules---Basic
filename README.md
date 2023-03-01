@@ -17,5 +17,13 @@ $ apt install iptables
 $ apt install iptables-persistent  
 ###### IPSET (optional, read below)  
 $ apt install ipset (optional, read below)  
+###### Enable the processes on systemd
+$ systemctl enable iptables  
+$ systemctl enable netfilter-persistent  
+$ systemctl enable ipset  
 
+## Applying the Rules and Basic Concepts
+If you are reading this guide, is probabily because you don't have a good knowledge  
+about firewalling your server and secure the processes running on it.  
+It is highly recommended to run all the services in localhost(127.0.0.1) like MySQL or Backend Servers(Spigot servers not Proxy BungeeGuard/Velocity).  
 
