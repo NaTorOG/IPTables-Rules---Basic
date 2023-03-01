@@ -43,8 +43,8 @@ Do not ever and ever use root or any sudo user to run externally accessible serv
 We aim to prevent your server from being bypassed by **UUID Spoofing.**  
 
 > Policies.           
-We aim with this guide to have a **DROP Policy** on INPUT and FORWARD chains.  
-By defaults these chains policies are on ACCEPT, meaning that **all the connections** towards every port are accepted.  
-Changing the policies to DROP, we will only grant access to the ports we want and so to the services we want.  
+ We aim with this guide to have a **DROP Policy** on INPUT and FORWARD chains.  
+ By defaults these chains policies are on ACCEPT, meaning that **all the connections** towards every port are accepted.  
+ Changing the policies to DROP, we will only grant access to the ports we want and so to the services we want.  
 
 
