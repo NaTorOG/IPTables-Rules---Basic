@@ -95,7 +95,7 @@ $ iptables -P FORWARD DROP
 *(As stated above, we have now configured our firewall to accept connections only towards ports/services we want.  
 Changing the policy to DROP, will DROP all the connections that we have not defined.)*
 
-$ netfilter-persistent save
+$ netfilter-persistent save  
 *(This command is used to save the rules of IPTables and make them persistent, otherwise after a server rebooting,  
 the rules will have been resetted)*
 
