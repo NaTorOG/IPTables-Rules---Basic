@@ -89,8 +89,8 @@ $ sudo iptables -A INPUT -p udp -m udp --dport A1:A2 -j ACCEPT
 
 `$ sudo iptables -A INPUT -p tcp -m tcp --dport 25565 -j ACCEPT`
 *(Replace if necessary 25565 with the port used by the Proxy server)*
-It is usually a good practice to limit per second the connections per IP, so we can limit and reduce some bot attacks specifically some very **poor designed** bot attacks.
-`$ sudo iptables -A INPUT -p tcp --syn --dport 25565 -m connlimit --connlimit-above 3 -j REJECT`
+It is usually a good practice to limit per second the connections per IP, so we can limit and reduce some bot attacks specifically some very **poor designed** bot attacks.  
+`$ sudo iptables -A INPUT -p tcp --syn --dport 25565 -m connlimit --connlimit-above 3 -j REJECT`  
 *(This rule will limit to 3connections/sec from the same IP towards port 25565)*
 
 `$ sudo iptables -A INPUT -p icmp -m icmp --icmp-type 8 -m limit --limit 1/sec --limit-burst 1 -j ACCEPT`
