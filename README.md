@@ -70,7 +70,23 @@ I assume that you have only installed SSH and Minecraft Servers on your server s
 Remember to respect the order of the rules and commands!
 
 `$ sudo iptables -A INPUT -i lo -j ACCEPT`
-*( The loopback interface is also used if you configure your application server to connect to a database server with a localhost address. As such, you will want to be sure that your firewall is allowing these connections.)* 
+*( The loopback interface is also used if you configure your application server to connect to a database server with a localhost address. As such, you will want to be sure that your firewall is allowing these connections.)*
+
+**READ CAREFULLY**  
+To allow return traffic for outgoing connections initiated by the server itself we can add this rule but if you are having problems with DDoS attack filling quickly the  
+conntrack table, you can switch to option number 2*.
+1*  
+`$ sudo iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT`
+2*
+```
+`$ sudo cat /proc/sys/net/ipv4/ip_local_port_range`
+*This will prompt the kernel range ports that we have to allow to let the kernel works without problems.*  
+Note please: `A1` is the First Number, and `A2` is the Second Number. 
+
+$ sudo iptables -A INPUT -p tcp -m tcp --dport A1:A2 -j ACCEPT
+$ sudo iptables -A INPUT -p udp -m udp --dport A1:A2 -j ACCEPT
+*(Replace A1 and A2 with the ports numbers displayed with the cat command executed above.)*
+```
 
 `$ sudo iptables -A INPUT -m conntrack --ctstate INVALID -j DROP`
 *(Sometimes it can be useful to log this type of packet but often it is fine to drop them.)*
@@ -78,14 +94,7 @@ Remember to respect the order of the rules and commands!
 `$ sudo iptables -A INPUT -p tcp -m tcp --dport 22 -j ACCEPT`
 *(This rule will allow the traffic towards SSH, change the port from 22 to another if you don't use 22)*  
 
-`$ sudo cat /proc/sys/net/ipv4/ip_local_port_range`
-*This will prompt the kernel range ports that we have to allow to let the kernel works without problems.*  
-Note please: `A1` is the First Number, and `A2` is the Second Number. 
-```
-$ sudo iptables -A INPUT -p tcp -m tcp --dport A1:A2 -j ACCEPT
-$ sudo iptables -A INPUT -p udp -m udp --dport A1:A2 -j ACCEPT
-```
-*(Replace A1 and A2 with the ports numbers displayed with the cat command executed above.)*  
+  
 
 `$ sudo iptables -A INPUT -p tcp -m tcp --dport 25565 -j ACCEPT`
 *(Replace if necessary 25565 with the port used by the Proxy server)*
