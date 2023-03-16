@@ -72,7 +72,7 @@ Remember to respect the order of the rules and commands!
 `$ sudo iptables -A INPUT -i lo -j ACCEPT`
 *( The loopback interface is also used if you configure your application server to connect to a database server with a localhost address. As such, you will want to be sure that your firewall is allowing these connections.)*
 
-**READ CAREFULLY**  
+> **READ CAREFULLY**  
 To allow return traffic for outgoing connections initiated by the server itself we can add this rule but if you are having problems with DDoS attack filling quickly the  
 conntrack table, you can switch to option number 2.  
 Option 1:    
