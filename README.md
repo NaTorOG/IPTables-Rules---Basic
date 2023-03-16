@@ -72,13 +72,13 @@ Remember to respect the order of the rules and commands!
 `$ sudo iptables -A INPUT -i lo -j ACCEPT`
 *( The loopback interface is also used if you configure your application server to connect to a database server with a localhost address. As such, you will want to be sure that your firewall is allowing these connections.)*
 
-> **READ CAREFULLY**  
+**READ CAREFULLY** 
+```
 To allow return traffic for outgoing connections initiated by the server itself we can add this rule but if you are having problems with DDoS attack filling quickly the  
 conntrack table, you can switch to option number 2.  
 Option 1:    
-`$ sudo iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT`  
+$ sudo iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT    
 Option 2:  
-```
 $ sudo cat /proc/sys/net/ipv4/ip_local_port_range
 This will prompt the kernel range ports that we have to allow to let the kernel works without problems. 
 Note please: `A1` is the First Number, and `A2` is the Second Number. 
