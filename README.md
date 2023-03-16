@@ -74,18 +74,18 @@ Remember to respect the order of the rules and commands!
 
 **READ CAREFULLY**  
 To allow return traffic for outgoing connections initiated by the server itself we can add this rule but if you are having problems with DDoS attack filling quickly the  
-conntrack table, you can switch to option number 2*.
-1*  
-`$ sudo iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT`
-2*
+conntrack table, you can switch to option number 2.  
+Option 1:    
+`$ sudo iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT`  
+Option 2:  
 ```
-`$ sudo cat /proc/sys/net/ipv4/ip_local_port_range`
-*This will prompt the kernel range ports that we have to allow to let the kernel works without problems.*  
+$ sudo cat /proc/sys/net/ipv4/ip_local_port_range
+This will prompt the kernel range ports that we have to allow to let the kernel works without problems. 
 Note please: `A1` is the First Number, and `A2` is the Second Number. 
 
 $ sudo iptables -A INPUT -p tcp -m tcp --dport A1:A2 -j ACCEPT
 $ sudo iptables -A INPUT -p udp -m udp --dport A1:A2 -j ACCEPT
-*(Replace A1 and A2 with the ports numbers displayed with the cat command executed above.)*
+(Replace A1 and A2 with the ports numbers displayed with the cat command executed above.)
 ```
 
 `$ sudo iptables -A INPUT -m conntrack --ctstate INVALID -j DROP`
